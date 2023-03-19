@@ -1,9 +1,14 @@
 #!/usr/bin/env node
 const zipcodes = require('zipcodes');
 
-export async function getWeather(args: string[]): Promise<void> {
-  const zipCode = args[0];
-  const timezone = args[1] || 'America/Los_Angeles'
+interface WeatherOptions {
+  timezone?: string;
+}
+
+const defaultTimezone = 'America/Los_Angeles';
+
+export async function getWeather(zipCode: string, options: WeatherOptions): Promise<void> {
+  const { timezone = defaultTimezone}: WeatherOptions = options;
 
   try {
     const location = zipcodes.lookup(zipCode);
@@ -15,7 +20,7 @@ export async function getWeather(args: string[]): Promise<void> {
     const { latitude, longitude } = location;
 
     const response = await fetch(
-      `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true&temperature_unit=fahrenheit&timezone=${timezone}`
+      `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true&temperature_unit=fahrenheit&timezon=${timezone};`
     );
 
     const weatherData = await response.json();
