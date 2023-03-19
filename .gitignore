@@ -1,0 +1,21 @@
+# Node.js dependencies
+node_modules/
+
+# TypeScript build output
+dist/
+
+# Debug files
+.nyc_output/
+coverage/
+
+# Environment files
+.env
+
+# IDE settings
+.vscode/
+.idea/
+*.iml
+
+# Operating system files
+.DS_Store
+Thumbs.db
